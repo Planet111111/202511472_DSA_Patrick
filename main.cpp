@@ -1,64 +1,63 @@
-#include <iostream>
-#include <string>
-#include "notepad.h"
-
-using namespace std;
+#include "Functions.h"
 
 int main() {
+
+    LibraryBook books[100];
+    int count = 0;
     int choice;
-    string filename;
 
-    // Use a do-while loop to display the menu repeatedly until option 4 is chosen
     do {
-        cout << "\n===============================\n";
-        cout << "        SIMPLE NOTEPAD         \n";
-        cout << "===============================\n";
-        cout << "1. Write File\n";
-        cout << "2. Read File\n";
-        cout << "3. Append File\n";
-        cout << "4. Exit\n";
-        cout << "-------------------------------\n";
-        cout << "Enter choice: ";
-        
-        // Handle cases where user types a non-integer
-        if (!(cin >> choice)) {
-            cout << "Invalid input. Please enter a number between 1 and 4.\n";
-            cin.clear();            // Clear the error flag
-            cin.ignore(1000, '\n'); // Discard invalid input line
-            continue;
+        cout << "\n===== LIBRARY BOOK BORROWING SYSTEM =====\n";
+        cout << "1. Add New Book\n";
+        cout << "2. Display All Books\n";
+        cout << "3. Borrow Book\n";
+        cout << "4. Return Book\n";
+        cout << "5. Search Book by ID\n";
+        cout << "6. Display Overdue Books\n";
+        cout << "7. Calculate Total Fines\n";
+        cout << "8. Exit\n";
+        cout << "Choose Option: ";
+        cin >> choice;
+
+        switch(choice) {
+
+        case 1:
+            addBook(books, count);
+            break;
+
+        case 2:
+            displayBooks(books, count);
+            break;
+
+        case 3:
+            borrowBookMenu(books, count);
+            break;
+
+        case 4:
+            returnBookMenu(books, count);
+            break;
+
+        case 5:
+            searchBook(books, count);
+            break;
+
+        case 6:
+            displayOverdueBooks(books, count);
+            break;
+
+        case 7:
+            calculateTotalFines(books, count);
+            break;
+
+        case 8:
+            cout << "Exiting Program...\n";
+            break;
+
+        default:
+            cout << "Invalid Choice.\n";
         }
 
-        // Use a switch statement for menu choices
-        switch (choice) {
-            case 1:
-                cout << "Enter filename to create/write (e.g., notes.txt): ";
-                cin >> filename;
-                writeFile(filename);
-                break;
-
-            case 2:
-                cout << "Enter filename to read: ";
-                cin >> filename;
-                readFile(filename);
-                break;
-
-            case 3:
-                cout << "Enter filename to append to: ";
-                cin >> filename;
-                appendFile(filename);
-                break;
-
-            case 4:
-                cout << "\nThank you for using Simple Notepad. Goodbye!\n";
-                break;
-
-            default:
-                // Handle invalid numerical choices
-                cout << "Invalid choice! Please select an option from 1 to 4.\n";
-                break;
-        }
-
-    } while (choice != 4); // Exit condition
+    } while(choice != 8);
 
     return 0;
 }
